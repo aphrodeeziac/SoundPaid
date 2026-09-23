@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SoundPaid — Launch coins. Pay artists.</title>
+<meta name="description" content="Launch Solana tokens and route the launch fee directly to a SoundCloud artist payout wallet.">
+<style>
+:root{--bg:#07090b;--panel:#0f1317;--panel2:#151b20;--line:#26313a;--text:#f6f8f9;--muted:#94a0aa;--lime:#b8ff4a;--green:#6df4aa;--orange:#ffab52;--red:#ff7272;--r:20px}*{box-sizing:border-box}body{margin:0;background:radial-gradient(1000px 520px at 65% -10%,#193721 0,transparent 60%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input{font:inherit}button{cursor:pointer}a{color:inherit}.wrap{max-width:1160px;margin:auto;padding:24px}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:8px 0 30px}.brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:24px;letter-spacing:-.04em}.mark{width:34px;height:34px;border-radius:10px;background:linear-gradient(135deg,var(--lime),var(--green));color:#071006;display:grid;place-items:center;font-weight:1000}.pill,.btn{border:1px solid var(--line);background:#10151a;color:var(--text);border-radius:999px;padding:11px 16px}.btn.primary{background:var(--lime);color:#071006;border-color:var(--lime);font-weight:900}.btn:disabled{opacity:.5;cursor:not-allowed}.hero{display:grid;grid-template-columns:1.2fr .8fr;gap:22px}.card{border:1px solid var(--line);background:linear-gradient(180deg,rgba(20,26,32,.94),rgba(10,14,17,.96));border-radius:var(--r);padding:26px;box-shadow:0 20px 70px rgba(0,0,0,.25)}.eyebrow{color:var(--lime);font-size:12px;font-weight:900;letter-spacing:.16em;text-transform:uppercase}h1{font-size:clamp(50px,8vw,92px);line-height:.91;letter-spacing:-.065em;margin:16px 0}.grad{background:linear-gradient(90deg,#fff,var(--lime));-webkit-background-clip:text;color:transparent}.sub{max-width:650px;color:#bac4cb;font-size:18px;line-height:1.55}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}.stat{background:#0a0e11;border:1px solid var(--line);border-radius:14px;padding:14px}.stat b{display:block;font-size:18px}.stat span{color:var(--muted);font-size:12px}.flow{display:grid;gap:14px;margin-top:18px}.step{display:flex;gap:12px;align-items:flex-start}.num{width:30px;height:30px;border-radius:50%;background:#1c252c;display:grid;place-items:center;color:var(--lime);font-weight:900;flex:0 0 auto}.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:30px 0 16px}.tab.active{background:#f1f4f5;color:#071006}.panel{display:grid;grid-template-columns:1fr 1fr;gap:20px}.hidden{display:none!important}.sectionTitle{font-size:30px;letter-spacing:-.04em;margin:0 0 6px}.muted{color:var(--muted)}label{display:block;margin:16px 0 7px;font-size:12px;color:#bdc7ce;font-weight:800;text-transform:uppercase;letter-spacing:.08em}input{width:100%;border:1px solid var(--line);background:#090d10;color:var(--text);padding:13px 14px;border-radius:12px;outline:none}input:focus{border-color:#667884}.row{display:flex;gap:10px}.row>*{flex:1}.notice{border:1px solid #2c3942;background:#0a0f13;border-radius:14px;padding:14px 16px;color:#aeb9c1;font-size:13px;line-height:1.5}.notice.ok{border-color:#2b5c40;color:#a9efc4}.notice.warn{border-color:#654b24;color:#ffd5a0}.status{min-height:22px;margin-top:12px;color:#abb6be;font-size:13px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}.verified{border:1px solid #2b5c40;background:#0b1710;border-radius:14px;padding:14px;margin-top:14px}.verified b{color:#9effb9}.mini{font-size:11px;color:#77848d;line-height:1.45}.receipt{padding:14px 0;border-bottom:1px solid #1d252b}.receipt:last-child{border-bottom:0}.badge{display:inline-block;padding:5px 8px;border-radius:999px;background:#173120;color:#97ffb7;font-size:11px}.footer{padding:34px 0 16px;color:#69757e;font-size:12px}@media(max-width:800px){.hero,.panel{grid-template-columns:1fr}.stats{grid-template-columns:1fr}.row{flex-direction:column}.wrap{padding:16px}.card{padding:20px}.nav .pill{max-width:175px;overflow:hidden;text-overflow:ellipsis}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="nav">
+    <div class="brand"><div class="mark">S</div>soundpaid</div>
+    <button id="connect" class="pill">Connect Solana wallet</button>
+  </div>
+
+  <section class="hero">
+    <div class="card">
+      <div class="eyebrow">Solana mainnet launch beta</div>
+      <h1>Launch coins.<br><span class="grad">Pay artists.</span></h1>
+      <div class="sub">Create a Solana token and route the launch fee directly to a SoundCloud artist's published payout wallet. No custody, no seed phrases, no hidden fee wallet.</div>
+      <div class="stats">
+        <div class="stat"><b>100%</b><span>launch fee goes to artist</span></div>
+        <div class="stat"><b>On-chain</b><span>artist payment in launch tx</span></div>
+        <div class="stat"><b>Fixed supply</b><span>mint authority revoked</span></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="eyebrow">How artist payout works</div>
+      <div class="flow">
+        <div class="step"><div class="num">1</div><div>Artist puts <b>SOUNDPAID:&lt;SOLANA_WALLET&gt;</b> in their public SoundCloud bio.</div></div>
+        <div class="step"><div class="num">2</div><div>Creator enters the SoundCloud profile. SoundPaid reads the public bio and extracts the payout wallet.</div></div>
+        <div class="step"><div class="num">3</div><div>The token launch and artist SOL fee are signed together in the creator's wallet.</div></div>
+        <div class="step"><div class="num">4</div><div>SoundPaid re-checks the confirmed transaction against Solana mainnet.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="tabs">
+    <button class="btn tab active" data-tab="launch">Launch</button>
+    <button class="btn tab" data-tab="artist">Verify artist</button>
+    <button class="btn tab" data-tab="receipts">My launches</button>
+  </div>
+
+  <section id="launch" class="panel">
+    <div class="card">
+      <h2 class="sectionTitle">Launch a token</h2>
+      <div class="muted">Standard SPL token on Solana mainnet with Metaplex metadata, fixed supply, no freeze authority, and direct artist fee payment.</div>
+      <label>Token name</label>
+      <input id="tokenName" maxlength="32" placeholder="Late Night Coin">
+      <div class="row">
+        <div><label>Ticker</label><input id="tokenSymbol" maxlength="10" placeholder="LATE"></div>
+        <div><label>Total supply</label><input id="tokenSupply" type="number" min="1" step="1" value="1000000000"></div>
+      </div>
+      <label>Metadata URI <span class="mini">optional</span></label>
+      <input id="metadataUri" maxlength="200" placeholder="https://.../metadata.json or ipfs://...">
+      <label>SoundCloud artist profile</label>
+      <input id="artistUrlLaunch" placeholder="https://soundcloud.com/artist">
+      <div class="actions"><button id="verifyLaunchArtist" class="btn">Verify payout wallet</button></div>
+      <div id="verifiedLaunchArtist" class="verified hidden"></div>
+      <label>Artist launch fee (SOL)</label>
+      <input id="launchFee" type="number" min="0.001" step="0.001" value="0.02">
+      <div class="mini">100% of this amount goes directly to the artist wallet published in the SoundCloud bio.</div>
+      <div class="actions"><button id="launchBtn" class="btn primary">Review & launch</button></div>
+      <div id="launchStatus" class="status"></div>
+    </div>
+
+    <div class="card">
+      <h2 class="sectionTitle">Before you sign</h2>
+      <div class="notice warn">This uses real SOL on mainnet. Your wallet shows the transaction before signing. Blockchain transactions are generally irreversible.</div>
+      <div style="height:12px"></div>
+      <div class="notice">This release routes the <b>launch fee</b> to the artist. It does not claim to route future DEX buy/sell fees. Continuous trading-fee routing needs a dedicated on-chain trading program.</div>
+      <div style="height:12px"></div>
+      <div class="mini">SoundPaid does not custody funds, store private keys, guarantee liquidity, or guarantee that any token will have a market. SoundCloud does not sponsor or endorse this site.</div>
+    </div>
+  </section>
+
+  <section id="artist" class="panel hidden">
+    <div class="card">
+      <h2 class="sectionTitle">Verify artist payout</h2>
+      <div class="muted">The artist controls the payout destination by publishing it on their own public SoundCloud profile.</div>
+      <label>SoundCloud profile URL</label>
+      <input id="artistUrlVerify" placeholder="https://soundcloud.com/artist">
+      <div class="actions"><button id="verifyArtistBtn" class="btn primary">Check public bio</button></div>
+      <div id="artistVerifyStatus" class="status"></div>
+      <div id="artistVerifyResult" class="verified hidden"></div>
+    </div>
+    <div class="card">
+      <h2 class="sectionTitle">Artist setup</h2>
+      <div class="notice ok">Add one line to the public SoundCloud bio:<br><br><span class="code">SOUNDPAID:&lt;YOUR_SOLANA_WALLET&gt;</span></div>
+      <div style="height:12px"></div>
+      <div class="mini">Example: <span class="code">SOUNDPAID:7xKX...abc</span>. The public bio controls where SoundPaid sends launch fees. Remove or change the tag to stop or redirect future payouts.</div>
+    </div>
+  </section>
+
+  <section id="receipts" class="panel hidden">
+    <div class="card" style="grid-column:1/-1">
+      <h2 class="sectionTitle">My confirmed launches</h2>
+      <div class="muted">Stored only in this browser after SoundPaid independently verifies the on-chain launch receipt.</div>
+      <div id="receiptList" style="margin-top:12px"></div>
+    </div>
+  </section>
+
+  <div class="footer">SoundPaid beta · Solana mainnet · No official SoundCloud affiliation.</div>
+</div>
+
+<script type="module">
+import {Connection,PublicKey,Transaction,SystemProgram,Keypair,LAMPORTS_PER_SOL,clusterApiUrl} from 'https://esm.sh/@solana/web3.js@1.98.4';
+import {MINT_SIZE,TOKEN_PROGRAM_ID,AuthorityType,createInitializeMintInstruction,getAssociatedTokenAddress,createAssociatedTokenAccountInstruction,createMintToInstruction,createSetAuthorityInstruction} from 'https://esm.sh/@solana/spl-token@0.4.14';
+import {PROGRAM_ID as TOKEN_METADATA_PROGRAM_ID,createCreateMetadataAccountV3Instruction} from 'https://esm.sh/@metaplex-foundation/mpl-token-metadata@2.13.0';
+
+const connection=new Connection(clusterApiUrl('mainnet-beta'),'confirmed');
+let wallet=null;
+let launchArtist=null;
+const $=id=>document.getElementById(id);
+const short=s=>s?String(s).slice(0,5)+'…'+String(s).slice(-5):'';
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const artistName=url=>{try{return new URL(url).pathname.replace(/^\//,'')}catch{return 'artist'}};
+const provider=()=>window.phantom?.solana||window.solana;
+
+async function connect(){
+  const p=provider();
+  if(!p) throw new Error('No Solana wallet detected. Open this site inside Phantom or install a compatible Solana wallet.');
+  const r=await p.connect();
+  wallet=r.publicKey;
+  $('connect').textContent=short(wallet.toBase58());
+  return p;
+}
+$('connect').onclick=()=>connect().catch(e=>alert(e.message));
+
+document.querySelectorAll('[data-tab]').forEach(btn=>btn.onclick=()=>{
+  document.querySelectorAll('[data-tab]').forEach(x=>x.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.panel').forEach(x=>x.classList.add('hidden'));
+  $(btn.dataset.tab).classList.remove('hidden');
+  if(btn.dataset.tab==='receipts') renderReceipts();
+});
+
+async function verifyArtist(url){
+  const r=await fetch('/api/verify-artist',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({soundcloudUrl:url})});
+  const j=await r.json();
+  if(!r.ok||!j.verified) throw new Error(j.error||'Artist verification failed');
+  return j;
+}
+
+$('verifyArtistBtn').onclick=async()=>{
+  const s=$('artistVerifyStatus');
+  try{
+    s.textContent='Checking the public SoundCloud bio…';
+    const j=await verifyArtist($('artistUrlVerify').value.trim());
+    $('artistVerifyResult').classList.remove('hidden');
+    $('artistVerifyResult').innerHTML='<b>Verified payout wallet</b><div class="code">'+esc(j.wallet)+'</div><div class="mini">'+esc(j.soundcloudUrl)+'</div>';
+    s.textContent='Artist payout wallet verified.';
+  }catch(e){$('artistVerifyResult').classList.add('hidden');s.textContent=e.message}
+};
+
+$('verifyLaunchArtist').onclick=async()=>{
+  const s=$('launchStatus');
+  try{
+    s.textContent='Checking artist payout wallet…';
+    launchArtist=await verifyArtist($('artistUrlLaunch').value.trim());
+    $('verifiedLaunchArtist').classList.remove('hidden');
+    $('verifiedLaunchArtist').innerHTML='<b>'+esc(artistName(launchArtist.soundcloudUrl))+'</b><div class="code">'+esc(launchArtist.wallet)+'</div><div class="mini">Payout wallet read from public SoundCloud bio.</div>';
+    s.textContent='Artist verified. Review the wallet above before launching.';
+  }catch(e){launchArtist=null;$('verifiedLaunchArtist').classList.add('hidden');s.textContent=e.message}
+};
+
+async function signSimulateSend(tx,extraSigners=[]){
+  const p=provider();
+  if(!wallet) await connect();
+  const latest=await connection.getLatestBlockhash('confirmed');
+  tx.feePayer=wallet;
+  tx.recentBlockhash=latest.blockhash;
+  if(extraSigners.length) tx.partialSign(...extraSigners);
+  const signed=await p.signTransaction(tx);
+  const sim=await connection.simulateTransaction(signed);
+  if(sim.value.err) throw new Error('Transaction simulation failed: '+JSON.stringify(sim.value.err));
+  const sig=await connection.sendRawTransaction(signed.serialize(),{skipPreflight:false,maxRetries:3});
+  await connection.confirmTransaction({signature:sig,blockhash:latest.blockhash,lastValidBlockHeight:latest.lastValidBlockHeight},'confirmed');
+  return sig;
+}
+
+function saveReceipt(receipt){
+  const current=JSON.parse(localStorage.getItem('soundpaid_receipts')||'[]');
+  const next=[receipt,...current.filter(x=>x.signature!==receipt.signature)].slice(0,30);
+  localStorage.setItem('soundpaid_receipts',JSON.stringify(next));
+}
+
+function renderReceipts(){
+  let list=[];
+  try{list=JSON.parse(localStorage.getItem('soundpaid_receipts')||'[]')}catch{}
+  $('receiptList').innerHTML=list.length?list.map(x=>'<div class="receipt"><div><b>'+esc(x.name)+' <span style="color:#b8ff4a">$'+esc(x.symbol)+'</span></b> <span class="badge">verified</span></div><div class="mini">Artist: '+esc(artistName(x.soundcloudUrl))+' · '+(Number(x.feeLamports)/LAMPORTS_PER_SOL).toFixed(3)+' SOL</div><div class="mini code">Mint: '+esc(x.mint)+'</div><div class="mini"><a target="_blank" rel="noreferrer" href="https://solscan.io/tx/'+esc(x.signature)+'">View transaction on Solscan ↗</a></div></div>').join(''):'No verified launches stored in this browser yet.';
+}
+renderReceipts();
+
+$('launchBtn').onclick=async()=>{
+  const s=$('launchStatus');
+  try{
+    if(!wallet) await connect();
+    const name=$('tokenName').value.trim();
+    const symbol=$('tokenSymbol').value.trim().toUpperCase();
+    const supply=Number($('tokenSupply').value);
+    const metadataUri=$('metadataUri').value.trim();
+    const fee=Number($('launchFee').value);
+    const url=$('artistUrlLaunch').value.trim();
+
+    if(!name||!symbol) throw new Error('Token name and ticker are required.');
+    if(!Number.isSafeInteger(supply)||supply<=0) throw new Error('Supply must be a positive whole number within browser safe-integer range.');
+    if(!Number.isFinite(fee)||fee<=0) throw new Error('Artist fee must be greater than zero.');
+    if(metadataUri.length>200) throw new Error('Metadata URI is too long.');
+
+    s.textContent='Re-checking the artist payout wallet…';
+    launchArtist=await verifyArtist(url);
+    $('verifiedLaunchArtist').classList.remove('hidden');
+    $('verifiedLaunchArtist').innerHTML='<b>'+esc(artistName(launchArtist.soundcloudUrl))+'</b><div class="code">'+esc(launchArtist.wallet)+'</div><div class="mini">Payout wallet read from public SoundCloud bio.</div>';
+
+    const decimals=6;
+    const units=BigInt(supply)*10n**BigInt(decimals);
+    if(units>18446744073709551615n) throw new Error('Supply is too large for an SPL token.');
+    const feeLamports=Math.round(fee*LAMPORTS_PER_SOL);
+    if(!Number.isSafeInteger(feeLamports)||feeLamports<=0) throw new Error('Invalid artist fee.');
+
+    const mint=Keypair.generate();
+    const rent=await connection.getMinimumBalanceForRentExemption(MINT_SIZE);
+    const ata=await getAssociatedTokenAddress(mint.publicKey,wallet);
+    const [metadataPda]=PublicKey.findProgramAddressSync(
+      [new TextEncoder().encode('metadata'),TOKEN_METADATA_PROGRAM_ID.toBuffer(),mint.publicKey.toBuffer()],
+      TOKEN_METADATA_PROGRAM_ID
+    );
+
+    const tx=new Transaction();
+    tx.add(
+      SystemProgram.createAccount({fromPubkey:wallet,newAccountPubkey:mint.publicKey,space:MINT_SIZE,lamports:rent,programId:TOKEN_PROGRAM_ID}),
+      createInitializeMintInstruction(mint.publicKey,decimals,wallet,null,TOKEN_PROGRAM_ID),
+      createAssociatedTokenAccountInstruction(wallet,ata,wallet,mint.publicKey),
+      createMintToInstruction(mint.publicKey,ata,wallet,units),
+      createCreateMetadataAccountV3Instruction(
+        {metadata:metadataPda,mint:mint.publicKey,mintAuthority:wallet,payer:wallet,updateAuthority:wallet},
+        {createMetadataAccountArgsV3:{data:{name,symbol,uri:metadataUri,sellerFeeBasisPoints:0,creators:null,collection:null,uses:null},isMutable:true,collectionDetails:null}}
+      ),
+      createSetAuthorityInstruction(mint.publicKey,wallet,AuthorityType.MintTokens,null,[],TOKEN_PROGRAM_ID),
+      SystemProgram.transfer({fromPubkey:wallet,toPubkey:new PublicKey(launchArtist.wallet),lamports:feeLamports})
+    );
+
+    s.textContent='Review in your wallet: create '+symbol+' and send '+fee+' SOL to '+artistName(launchArtist.soundcloudUrl)+'…';
+    const signature=await signSimulateSend(tx,[mint]);
+    const mintAddress=mint.publicKey.toBase58();
+
+    s.textContent='Confirmed on Solana. Verifying the launch receipt…';
+    const rr=await fetch('/api/register-launch',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({
+        signature,
+        creatorWallet:wallet.toBase58(),
+        mint:mintAddress,
+        name,
+        symbol,
+        soundcloudUrl:launchArtist.soundcloudUrl,
+        supply,
+        decimals,
+        feeLamports
+      })
+    });
+    const out=await rr.json();
+    if(!rr.ok||!out.ok) throw new Error('Launch confirmed on Solana, but receipt verification failed: '+(out.error||'unknown error')+' · Mint '+mintAddress+' · Tx '+signature);
+    saveReceipt(out.receipt);
+    s.innerHTML='Confirmed and independently verified.<br>Mint: <span class="code">'+esc(mintAddress)+'</span><br><a target="_blank" rel="noreferrer" href="https://solscan.io/tx/'+esc(signature)+'">View transaction on Solscan ↗</a>';
+  }catch(e){s.textContent=e.message}
+};
+</script>
+</body>
+</html>
