@@ -1,0 +1,7 @@
+e ${fee} SOL to the verified artist…`; const sig=await signSimulateSend(tx,[mint]); const mintAddress=mint.publicKey.toBase58(); $('launchStatus').textContent='Confirmed on Solana. Verifying the public launch receipt…';
+ const recordRes=await fetch('/api/register-launch',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({signature:sig,creatorWallet:wallet.toBase58(),artistWallet,mint:mintAddress,name,symbol,metadataUri,supply:supplyRaw,decimals,feeLamports})}); const record=await recordRes.json();
+ if(recordRes.ok){$('launchStatus').innerHTML=`Confirmed launch. Mint: <span class="code">${esc(mintAddress)}</span><br>Transaction: <a target="_blank" rel="noreferrer" href="https://solscan.io/tx/${esc(sig)}">${esc(short(sig))}</a><br><span class="mini">Backend independently verified the mint and artist payment against Solana mainnet.</span>`; loadLaunches();}
+ else {$('launchStatus').innerHTML=`Token launch confirmed on Solana, but the public receipt could not be recorded yet: ${esc(record.error||'verification pending')}.<br>Mint: <span class="code">${esc(mintAddress)}</span><br>Transaction: <a target="_blank" rel="noreferrer" href="https://solscan.io/tx/${esc(sig)}">${esc(short(sig))}</a>`;}
+ }catch(e){$('launchStatus').textContent=e.message}};
+</script>
+</body></html>
