@@ -1,0 +1,36 @@
+[build]
+  publish = "public"
+  functions = "netlify/functions"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[redirects]]
+  from = "/api/challenge"
+  to = "/.netlify/functions/challenge"
+  status = 200
+
+[[redirects]]
+  from = "/api/verify-artist"
+  to = "/.netlify/functions/verify-artist"
+  status = 200
+
+[[redirects]]
+  from = "/api/artists"
+  to = "/.netlify/functions/artists"
+  status = 200
+
+[[redirects]]
+  from = "/api/register-launch"
+  to = "/.netlify/functions/register-launch"
+  status = 200
+
+[[redirects]]
+  from = "/api/launches"
+  to = "/.netlify/functions/launches"
+  status = 200
