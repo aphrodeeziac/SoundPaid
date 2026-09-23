@@ -1,4 +1,5 @@
 [build]
+  command = "mkdir -p public && cat webparts/*.htmlpart > public/index.html"
   publish = "public"
   functions = "netlify/functions"
 
