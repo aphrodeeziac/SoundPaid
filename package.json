@@ -1,0 +1,11 @@
+{
+  "name": "soundpaid",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "dependencies": {
+    "@netlify/blobs": "^9.1.2",
+    "bs58": "^6.0.0",
+    "tweetnacl": "^1.0.3"
+  }
+}
