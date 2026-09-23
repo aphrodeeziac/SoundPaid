@@ -55,4 +55,5 @@ jobs:
         run: npx -y netlify-cli@latest deploy --build --prod --site "$NETLIFY_SITE_ID" --auth "$NETLIFY_AUTH_TOKEN"
 
       - name: Print public URL
-        run: echo "SoundPaid public URL: $NETLIFY_SITE_URL"
+        run: |
+          echo "SoundPaid public URL: $NETLIFY_SITE_URL"
