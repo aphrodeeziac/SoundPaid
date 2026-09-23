@@ -1,0 +1,45 @@
+ave blank to publish the on-chain name and ticker without an external image/description file.</div><label>Verified SoundCloud artist</label><select id="artistSelect"><option value="">Load verified artists…</option></select>
+      <label>Artist launch fee (SOL)</label><input id="launchFee" type="number" min="0.001" step="0.001" value="0.02" /><div class="mini">100% of this SOL transfer goes directly to the selected verified artist in the same transaction.</div>
+      <div class="actions"><button id="launchBtn" class="btn primary">Review & launch</button></div><div id="launchStatus" class="status"></div>
+    </div>
+    <div class="card"><h2 class="sectionTitle">Before you sign</h2><div class="notice warn">Mainnet means real SOL. Your wallet shows the transaction before signing. SoundPaid does not custody funds, store private keys, or guarantee a token market.</div><div style="height:12px"></div><div class="notice">This beta creates the token mint and routes the <b>launch fee</b> to the artist. Continuous buy/sell fee routing requires a dedicated trading/bonding-curve program and is not represented here as already live.</div><div style="height:12px"></div><div class="mini">The token name and ticker are written to the standard Metaplex metadata account. An optional metadata URI can point to image/description JSON. Automatic liquidity is separate; creating a token does not create demand or guarantee tradability.</div></div>
+  </section>
+
+  <section id="verify" class="panel grid hidden">
+    <div class="card"><h2 class="sectionTitle">Verify an artist</h2><div class="muted">Use the wallet that should receive payouts.</div>
+      <label>SoundCloud profile URL</label><input id="scUrl" placeholder="https://soundcloud.com/artist" />
+      <div class="actions"><button id="challengeBtn" class="btn primary">Generate bio code</button></div><div id="challengeStatus" class="status"></div>
+      <div id="challengeBox" class="notice hidden"><div>Put this exact code in the public SoundCloud profile bio:</div><div id="bioCode" class="code" style="margin:10px 0"></div><div class="mini">Keep the code visible until verification succeeds. Challenges expire after 30 minutes.</div><div class="actions"><button id="verifyBtn" class="btn primary">Sign & verify</button></div></div>
+    </div>
+    <div class="card"><h2 class="sectionTitle">Why two proofs?</h2><div class="flow"><div class="step"><div class="num">A</div><div>The SoundCloud bio proves control of the public artist profile.</div></div><div class="step"><div class="num">B</div><div>The signed message proves control of the Solana payout wallet.</div></div></div><div style="height:16px"></div><div class="notice">Verification does not imply that SoundCloud endorses, sponsors, or is affiliated with SoundPaid.</div></div>
+  </section>
+
+  <section id="artists" class="panel hidden"><div class="card"><h2 class="sectionTitle">Verified artists</h2><div id="artistList" class="muted">Loading…</div></div></section>
+
+  <section id="launches" class="panel hidden"><div class="card"><h2 class="sectionTitle">Confirmed mainnet launches</h2><div class="muted" style="margin-bottom:10px">Only launches independently re-checked by the SoundPaid backend against Solana mainnet appear here.</div><div id="launchList" class="muted">Loading…</div></div></section>
+
+  <section id="router" class="panel grid hidden">
+    <div class="card"><h2 class="sectionTitle">Distribute SOL</h2><div class="muted">Send a creator-controlled fee balance to a verified artist wallet.</div><label>Verified artist</label><select id="routerArtist"><option value="">Load verified artists…</option></select><label>Amount (SOL)</label><input id="routerAmount" type="number" min="0" step="0.001" value="0.01"/><div class="actions"><button id="routerBtn" class="btn primary">Review distribution</button></div><div id="routerStatus" class="status"></div></div>
+    <div class="card"><h2 class="sectionTitle">Transaction safety</h2><div class="notice ok">The transfer is assembled client-side, signed by your connected wallet, simulated against Solana mainnet, and only then broadcast.</div><div style="height:12px"></div><div class="mini">Always verify the recipient wallet and amount in your wallet approval screen. Blockchain transactions are generally irreversible.</div></div>
+  </section>
+  <div class="footer">SoundPaid beta · Built on <span class="sol">Solana</span> · No official SoundCloud affiliation.</div>
+</div>
+<script type="module">
+import {Connection,PublicKey,Transaction,SystemProgram,Keypair,LAMPORTS_PER_SOL,clusterApiUrl} from 'https://esm.sh/@solana/web3.js@1.98.4';
+import {MINT_SIZE,TOKEN_PROGRAM_ID,AuthorityType,createInitializeMintInstruction,getAssociatedTokenAddress,createAssociatedTokenAccountInstruction,createMintToInstruction,createSetAuthorityInstruction} from 'https://esm.sh/@solana/spl-token@0.4.14';
+import {PROGRAM_ID as TOKEN_METADATA_PROGRAM_ID,createCreateMetadataAccountV3Instruction} from 'https://esm.sh/@metaplex-foundation/mpl-token-metadata@2.13.0';
+import bs58 from 'https://esm.sh/bs58@6.0.0';
+
+const connection = new Connection(clusterApiUrl('mainnet-beta'),'confirmed');
+let wallet=null, artists=[]; const $=id=>document.getElementById(id);
+const short=s=>s?`${s.slice(0,4)}…${s.slice(-4)}`:'';
+const esc=v=>String(v??'').replace(/[&<>'\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','\"':'&quot;'}[c]));
+const artistName=url=>{try{return new URL(url).pathname.replace(/^\//,'')}catch{return 'artist'}};
+function provider(){return window.phantom?.solana || window.solana}
+async function connect(){const p=provider(); if(!p) throw new Error('No Solana wallet detected. Open in Phantom or install a compatible wallet.'); const r=await p.connect(); wallet=r.publicKey; $('connect').textContent=short(wallet.toBase58()); return p}
+$('connect').onclick=()=>connect().catch(e=>alert(e.message));
+
+document.querySelectorAll('[data-tab]').forEach(b=>b.onclick=()=>{document.querySelectorAll('[data-tab]').forEach(x=>x.classList.remove('active'));b.classList.add('active');document.querySelectorAll('.panel').forEach(p=>p.classList.add('hidden'));$(b.dataset.tab).classList.remove('hidden');if(b.dataset.tab==='artists') loadArtists();if(b.dataset.tab==='launches') loadLaunches();});
+
+async function loadArtists(){
+ try{const r=await fetch('/api/artists',{cache:'no-store'}); const j=await r.json(); if(!r.ok) throw new Error(j.error||'Artist lookup failed'); artists=j.artists||[]; const opts='<option value="">Select a verified artist</option>'+artists.map(a=>`<option value="${esc(a.wallet)}">${esc(artistName(a.soundcloudUrl))} · ${esc(short(a.wallet))}</option>`).join(''); $('artistSelect').innerHTML=opts; $('routerArtist').innerHTML=opts; $('artistList').innerHTML=artists.length?artists.map(a=>`<div class="artist"><div><a href="${esc(a.soundcloudUrl)}" target="_blank" rel="noreferrer">${esc(artistName(a.soundcloudUrl))}</a><div class="mini code">${esc(a.wallet)}</div></div><span class="
