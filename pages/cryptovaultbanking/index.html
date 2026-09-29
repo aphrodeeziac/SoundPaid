@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#080d14">
+<title>Crypto Vault</title>
+<style>
+:root{--bg:#080d14;--panel:#101923;--panel2:#152131;--line:#243244;--text:#f4f8fb;--muted:#8ea0b5;--mint:#79efbd;--blue:#55c7ff;--red:#ff7180;--amber:#ffd166}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at 80% -20%,rgba(85,199,255,.14),transparent 38%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}.app{min-height:100vh;display:grid;grid-template-columns:235px 1fr}.side{border-right:1px solid var(--line);padding:26px 18px;position:sticky;top:0;height:100vh;background:rgba(7,11,17,.8);backdrop-filter:blur(14px);display:flex;flex-direction:column}.brand{display:flex;gap:11px;align-items:center;padding:0 8px 24px}.logo{width:38px;height:38px;border:1px solid #335067;border-radius:11px;display:grid;place-items:center;color:var(--mint);font-size:21px}.brand b{display:block}.brand small{display:block;color:var(--muted);font-size:10px;margin-top:3px}.nav{display:grid;gap:6px}.nav button{border:0;background:transparent;color:var(--muted);text-align:left;padding:12px 13px;border-radius:10px;font-weight:700;cursor:pointer}.nav button.active,.nav button:hover{background:var(--panel2);color:var(--text)}.sandbox{margin-top:auto;border:1px solid rgba(255,209,102,.25);background:rgba(255,209,102,.06);color:var(--amber);padding:10px;border-radius:10px;font-size:11px;line-height:1.45}.main{max-width:1320px;width:100%;padding:28px 34px 70px;margin:auto}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}.top h1{margin:0;font-size:27px}.top p{margin:4px 0 0;color:var(--muted);font-size:12px}.badge{border:1px solid rgba(121,239,189,.25);color:var(--mint);background:rgba(121,239,189,.06);padding:7px 10px;border-radius:999px;font-size:11px}.view{display:none}.view.active{display:block}.grid2{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}.panel{border:1px solid var(--line);background:linear-gradient(180deg,rgba(19,30,44,.95),rgba(13,21,31,.97));border-radius:17px;padding:22px;box-shadow:0 24px 70px rgba(0,0,0,.28)}.label{font-size:10px;color:var(--muted);font-weight:850;letter-spacing:.14em}.money{font-size:39px;font-weight:820;letter-spacing:-.04em;margin:5px 0}.mint{color:var(--mint)}.muted{color:var(--muted)}.quick{display:flex;gap:9px;margin-top:20px}.btn{border:1px solid var(--line);background:#172334;color:var(--text);border-radius:10px;padding:10px 14px;font-weight:750;cursor:pointer}.btn.primary{background:linear-gradient(135deg,var(--mint),#55d9a5);color:#06120e;border-color:transparent}.btn.danger{color:#ff9aa5}.btn:disabled{opacity:.5;cursor:not-allowed}.spend{display:flex;justify-content:space-between;align-items:start}.bar{height:7px;background:#1a2635;border-radius:999px;overflow:hidden;margin:22px 0 8px}.bar span{display:block;height:100%;width:11%;background:linear-gradient(90deg,var(--mint),var(--blue))}.rows{margin-top:16px}.asset,.txn{display:grid;align-items:center;border-top:1px solid var(--line);padding:14px 0}.asset{grid-template-columns:1.4fr .8fr .8fr}.asset:first-child,.txn:first-child{border-top:0}.coin{display:flex;align-items:center;gap:11px}.icon{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#182637;border:1px solid var(--line);font-weight:850}.coin b,.coin small{display:block}.coin small{color:var(--muted);margin-top:2px}.right{text-align:right}.card{min-height:255px;border-radius:22px;padding:24px;background:linear-gradient(135deg,#1a2a3c,#0b121b 48%,#123527);border:1px solid #304656;position:relative;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.38)}.card:after{content:"";position:absolute;width:300px;height:300px;border:1px solid rgba(121,239,189,.12);border-radius:50%;right:-115px;top:-115px}.cardhead{display:flex;justify-content:space-between;font-size:12px;font-weight:850;letter-spacing:.08em}.chip{width:44px;height:32px;border-radius:7px;background:linear-gradient(135deg,#dacb8e,#897f52);margin-top:45px}.number{font-size:20px;letter-spacing:.16em;margin-top:24px}.cardfoot{position:absolute;left:24px;right:24px;bottom:22px;display:flex;justify-content:space-between;align-items:end}.cardfoot small{color:#94a7aa;font-size:8px;display:block}.control{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}.section-title{display:flex;justify-content:space-between;gap:12px;align-items:end;margin-bottom:16px}.section-title h2{margin:0;font-size:21px}.section-title p{margin:4px 0 0;color:var(--muted);font-size:12px}.wallets{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.wallet .value{font-size:23px;font-weight:800;margin:15px 0 4px}.txn{grid-template-columns:1fr auto}.txn .left{display:flex;gap:11px;align-items:center}.txn .mini{width:34px;height:34px;border-radius:10px;background:#182637;display:grid;place-items:center}.txn b,.txn small{display:block}.txn small{color:var(--muted);margin-top:3px}.positive{color:var(--mint)}.settings{display:grid;grid-template-columns:1fr 1fr;gap:16px}.field{display:grid;gap:6px;margin-top:14px}.field label{font-size:11px;color:var(--muted)}.field input,.field select{width:100%;background:#0c141e;border:1px solid var(--line);color:var(--text);border-radius:9px;padding:10px}.notice{margin-top:16px;border-color:rgba(255,209,102,.28);background:rgba(255,209,102,.05)}.notice p{margin:7px 0 0;color:var(--muted);line-height:1.6;font-size:12px}.modalbg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:20;backdrop-filter:blur(4px)}.modal{display:none;position:fixed;z-index:21;left:50%;top:50%;transform:translate(-50%,-50%);width:min(430px,calc(100% - 28px));border:1px solid var(--line);background:#0f1824;border-radius:17px;padding:22px}.modal.show,.modalbg.show{display:block}.modal h3{margin:0 0 14px}.quote{border:1px solid var(--line);background:#0b121b;border-radius:10px;padding:12px;margin:14px 0}.quote strong{display:block;font-size:20px}.close{position:absolute;right:13px;top:9px;border:0;background:none;color:var(--muted);font-size:24px;cursor:pointer}.toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,18px);background:#172536;border:1px solid var(--line);padding:10px 14px;border-radius:10px;opacity:0;transition:.2s;z-index:30;font-size:12px}.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(max-width:900px){.app{grid-template-columns:1fr}.side{position:fixed;z-index:10;bottom:0;top:auto;height:auto;width:100%;padding:8px;border-right:0;border-top:1px solid var(--line)}.brand,.sandbox{display:none}.nav{grid-template-columns:repeat(4,1fr)}.nav button{text-align:center;font-size:11px;padding:10px 6px}.main{padding:22px 16px 85px}.grid2,.settings{grid-template-columns:1fr}.wallets{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.top h1{font-size:23px}.badge{display:none}.money{font-size:33px}.wallets{grid-template-columns:1fr}.asset{grid-template-columns:1fr .8fr}.asset .price{display:none}.card{min-height:220px}.number{font-size:16px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="side">
+  <div class="brand"><div class="logo">◇</div><div><b>Crypto Vault</b><small>Store crypto. Spend anywhere.</small></div></div>
+  <div class="nav">
+    <button class="active" data-view="overview">Overview</button>
+    <button data-view="wallet">Wallet</button>
+    <button data-view="cardview">Vault Card</button>
+    <button data-view="activity">Activity</button>
+  </div>
+  <div class="sandbox">● SANDBOX MODE<br>No real deposits, withdrawals, conversions, or card payments.</div>
+</aside>
+<main class="main">
+  <div class="top"><div><h1 id="title">Overview</h1><p>Crypto Vault spending account prototype</p></div><div class="badge">SANDBOX · NO REAL FUNDS</div></div>
+
+  <section id="overview" class="view active">
+    <div class="grid2">
+      <div class="panel">
+        <div class="label">TOTAL CRYPTO VAULT</div>
+        <div class="money" id="total">$0.00</div>
+        <div class="mint">Sandbox portfolio</div>
+        <div class="quick"><button class="btn primary" data-open="convert">Convert</button><button class="btn" data-viewgo="wallet">View wallet</button></div>
+      </div>
+      <div class="panel">
+        <div class="spend"><div><div class="label">AVAILABLE TO SPEND</div><div class="money" id="spend">$0.00</div><div class="muted">USDC sandbox balance</div></div><div class="icon">S</div></div>
+        <div class="bar"><span></span></div><div class="muted" style="display:flex;justify-content:space-between;font-size:11px"><span>Weekly card spend</span><b id="weekly">$0 / $0</b></div>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:16px">
+      <div class="panel"><div class="section-title"><div><div class="label">YOUR ASSETS</div><h2>Crypto Vault</h2></div></div><div id="assets" class="rows"></div></div>
+      <div class="panel">
+        <div class="card" id="miniCard"><div class="cardhead"><span>CRYPTO VAULT</span><span>)))</span></div><div class="chip"></div><div class="number">•••• •••• •••• 4821</div><div class="cardfoot"><div><small>CARDHOLDER</small><b>ANTHONY A.</b></div><div><small>STATUS</small><b id="statusText">ACTIVE</b></div></div></div>
+        <div class="control"><button class="btn" id="freeze">Freeze card</button><button class="btn" data-viewgo="cardview">Card controls</button></div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px"><div class="section-title"><div><div class="label">RECENT ACTIVITY</div><h2>Transactions</h2></div><button class="btn" data-viewgo="activity">See all</button></div><div id="recent"></div></div>
+  </section>
+
+  <section id="wallet" class="view">
+    <div class="section-title"><div><div class="label">WALLET</div><h2>Your assets</h2><p>Sandbox balances for the Crypto Vault prototype.</p></div><button class="btn primary" data-open="convert">Convert to USDC</button></div>
+    <div id="walletGrid" class="wallets"></div>
+    <div class="panel notice"><b>Production safeguard</b><p>Real deposits and withdrawals are disabled until custody, identity verification, transaction monitoring, liquidity, and other required regulated services are connected.</p></div>
+  </section>
+
+  <section id="cardview" class="view">
+    <div class="section-title"><div><div class="label">CRYPTO VAULT CARD</div><h2>Card controls</h2><p>Physical-card experience in sandbox mode.</p></div></div>
+    <div class="grid2">
+      <div><div class="card" id="bigCard"><div class="cardhead"><span>CRYPTO VAULT</span><span>)))</span></div><div class="chip"></div><div class="number">•••• •••• •••• 4821</div><div class="cardfoot"><div><small>CARDHOLDER</small><b>ANTHONY A.</b></div><div><small>STATUS</small><b id="statusText2">ACTIVE</b></div></div></div></div>
+      <div class="panel"><h2 style="margin:0">Spending controls</h2><div class="field"><label>Weekly spending limit</label><input id="limit" type="number" min="0" max="100000" step="50"></div><div class="control"><button class="btn primary" id="saveLimit">Save limit</button><button class="btn danger" id="freeze2">Freeze card</button></div><div class="notice" style="margin-top:18px"><b>Card issuing not live</b><p>This screen does not create card credentials or authorize payments. A regulated issuing program is required before a real physical card can be issued.</p></div></div>
+    </div>
+  </section>
+
+  <section id="activity" class="view">
+    <div class="section-title"><div><div class="label">ACTIVITY</div><h2>Transaction history</h2><p>Sandbox activity stored on this device.</p></div><button class="btn" id="reset">Reset sandbox</button></div>
+    <div class="panel"><div id="allTx"></div></div>
+  </section>
+</main>
+</div>
+
+<div class="modalbg" id="modalbg"></div>
+<div class="modal" id="convertModal">
+  <button class="close" data-close>×</button><h3>Convert to USDC</h3>
+  <div class="field"><label>Sell from</label><select id="from"><option>SOL</option><option>BTC</option><option>ETH</option></select></div>
+  <div class="field"><label>USD amount to convert</label><input id="amount" type="number" min="1" step="1" value="100"></div>
+  <div class="quote"><span class="muted">Estimated receive after 0.50% sandbox fee</span><strong id="receive">99.50 USDC</strong></div>
+  <button class="btn primary" id="confirm" style="width:100%">Confirm sandbox conversion</button>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+var defaultState={balances:{BTC:.0268,SOL:5.64,ETH:.215,USDC:475.26},prices:{BTC:90672,SOL:219.86,ETH:3813.95,USDC:1},card:{frozen:false,weeklyLimit:1500,weeklySpent:151.22},tx:[
+{name:'Target',detail:'Card •••• 4821 · Demo',amount:-61.27,type:'card'},
+{name:'Chevron',detail:'Card •••• 4821 · Demo',amount:-52.81,type:'card'},
+{name:'Amazon',detail:'Card •••• 4821 · Demo',amount:-29.14,type:'card'},
+{name:'SOL → USDC',detail:'Sandbox conversion',amount:250,type:'convert'},
+{name:'USDC deposit',detail:'Sandbox wallet',amount:500,type:'deposit'}]};
+var state=load();
+function load(){try{var x=JSON.parse(localStorage.getItem('cryptoVaultPreview'));return x||JSON.parse(JSON.stringify(defaultState))}catch(e){return JSON.parse(JSON.stringify(defaultState))}}
+function save(){localStorage.setItem('cryptoVaultPreview',JSON.stringify(state))}
+function money(n){return(n<0?'-':'')+'$'+Math.abs(n).toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2})}
+function total(){var n=0;Object.keys(state.balances).forEach(function(k){n+=state.balances[k]*state.prices[k]});return n}
+function toast(t){var e=document.getElementById('toast');e.textContent=t;e.classList.add('show');clearTimeout(window.tt);window.tt=setTimeout(function(){e.classList.remove('show')},2200)}
+function txHtml(t){var ico=t.type==='card'?'◉':t.type==='convert'?'↔':'↓';return '<div class="txn"><div class="left"><div class="mini">'+ico+'</div><div><b>'+t.name+'</b><small>'+t.detail+'</small></div></div><b class="'+(t.amount>0?'positive':'')+'">'+money(t.amount)+'</b></div>'}
+function render(){
+document.getElementById('total').textContent=money(total());document.getElementById('spend').textContent=money(state.balances.USDC);
+document.getElementById('weekly').textContent=money(state.card.weeklySpent)+' / '+money(state.card.weeklyLimit);
+var order=['BTC','SOL','ETH','USDC'];var rows='';var wallets='';
+order.forEach(function(k){var q=state.balances[k],v=q*state.prices[k];rows+='<div class="asset"><div class="coin"><div class="icon">'+k.charAt(0)+'</div><div><b>'+k+'</b><small>'+q.toLocaleString(undefined,{maximumFractionDigits:6})+' '+k+'</small></div></div><div class="right price"><b>'+money(state.prices[k])+'</b><small class="muted">Sandbox price</small></div><div class="right"><b>'+money(v)+'</b></div></div>';wallets+='<div class="panel wallet"><div class="icon">'+k.charAt(0)+'</div><div class="value">'+money(v)+'</div><b>'+k+'</b><div class="muted" style="font-size:11px;margin-top:4px">'+q.toLocaleString(undefined,{maximumFractionDigits:6})+' '+k+'</div></div>'});
+document.getElementById('assets').innerHTML=rows;document.getElementById('walletGrid').innerHTML=wallets;
+document.getElementById('recent').innerHTML=state.tx.slice(0,4).map(txHtml).join('');document.getElementById('allTx').innerHTML=state.tx.map(txHtml).join('');
+var status=state.card.frozen?'FROZEN':'ACTIVE';document.getElementById('statusText').textContent=status;document.getElementById('statusText2').textContent=status;document.getElementById('miniCard').style.filter=state.card.frozen?'grayscale(.8) brightness(.72)':'none';document.getElementById('bigCard').style.filter=state.card.frozen?'grayscale(.8) brightness(.72)':'none';document.getElementById('freeze').textContent=state.card.frozen?'Unfreeze card':'Freeze card';document.getElementById('freeze2').textContent=state.card.frozen?'Unfreeze card':'Freeze card';document.getElementById('limit').value=state.card.weeklyLimit}
+function setView(id){document.querySelectorAll('.view').forEach(function(x){x.classList.remove('active')});document.querySelectorAll('.nav button').forEach(function(x){x.classList.toggle('active',x.getAttribute('data-view')===id)});document.getElementById(id).classList.add('active');document.getElementById('title').textContent={overview:'Overview',wallet:'Wallet',cardview:'Vault Card',activity:'Activity'}[id]||'Crypto Vault';window.scrollTo(0,0)}
+document.querySelectorAll('[data-view]').forEach(function(b){b.onclick=function(){setView(b.getAttribute('data-view'))}});
+document.querySelectorAll('[data-viewgo]').forEach(function(b){b.onclick=function(){setView(b.getAttribute('data-viewgo'))}});
+function toggleFreeze(){state.card.frozen=!state.card.frozen;save();render();toast(state.card.frozen?'Card frozen in sandbox':'Card active in sandbox')}
+document.getElementById('freeze').onclick=toggleFreeze;document.getElementById('freeze2').onclick=toggleFreeze;
+document.getElementById('saveLimit').onclick=function(){var n=Number(document.getElementById('limit').value);if(!isFinite(n)||n<0)return toast('Enter a valid limit');state.card.weeklyLimit=n;save();render();toast('Sandbox limit saved')};
+var bg=document.getElementById('modalbg'),modal=document.getElementById('convertModal');function openM(){bg.classList.add('show');modal.classList.add('show')}function closeM(){bg.classList.remove('show');modal.classList.remove('show')}
+document.querySelectorAll('[data-open="convert"]').forEach(function(b){b.onclick=openM});document.querySelectorAll('[data-close]').forEach(function(b){b.onclick=closeM});bg.onclick=closeM;
+function quote(){var n=Math.max(0,Number(document.getElementById('amount').value)||0);document.getElementById('receive').textContent=(n*.995).toFixed(2)+' USDC'}document.getElementById('amount').oninput=quote;
+document.getElementById('confirm').onclick=function(){var from=document.getElementById('from').value,usd=Number(document.getElementById('amount').value)||0;if(usd<=0)return toast('Enter an amount');var qty=usd/state.prices[from];if(state.balances[from]<qty)return toast('Insufficient sandbox '+from);var fee=usd*.005,receive=usd-fee;state.balances[from]-=qty;state.balances.USDC+=receive;state.tx.unshift({name:from+' → USDC',detail:'Sandbox conversion · 0.50% fee',amount:receive,type:'convert'});save();render();closeM();toast('Converted '+money(usd)+' of '+from+' in sandbox')};
+document.getElementById('reset').onclick=function(){state=JSON.parse(JSON.stringify(defaultState));save();render();toast('Sandbox reset')};
+render();quote();
+</script>
+</body>
+</html>
